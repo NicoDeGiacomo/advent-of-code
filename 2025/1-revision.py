@@ -1,6 +1,6 @@
-import data_helper
+import helper
 
-data = data_helper.get_data(1)
+data = helper.get_data(1)
 
 def main():
     pointer = 50

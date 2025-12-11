@@ -1,8 +1,8 @@
-import data_helper
+import helper
 import operator
 from functools import reduce
 
-data = data_helper.get_data(6)
+data = helper.get_data(6)
 
 def main():
     matrix = [[c for c in line.split()] for line in data.strip().split("\n")]

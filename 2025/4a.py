@@ -1,6 +1,6 @@
-import data_helper
+import helper
 
-data = data_helper.get_data(4)
+data = helper.get_data(4)
 
 
 def main():

@@ -1,6 +1,6 @@
-import data_helper
+import helper
 
-data = data_helper.get_data(7).strip("\n").split("\n")
+data = helper.get_data(7).strip("\n").split("\n")
 
 matrix = [[c for c in line] for line in data]
 

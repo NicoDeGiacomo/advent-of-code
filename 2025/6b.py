@@ -1,8 +1,8 @@
-import data_helper
+import helper
 import operator
 from functools import reduce
 
-data = data_helper.get_data(6).strip("\n").split("\n")
+data = helper.get_data(6).strip("\n").split("\n")
 
 def main():
     operations = []

@@ -1,6 +1,6 @@
-import data_helper
+import helper
 
-data = data_helper.get_data(2)
+data = helper.get_data(2)
 
 def main():
     sum = 0
