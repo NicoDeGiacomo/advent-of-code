@@ -19,16 +19,14 @@ B_0 ¦ B_1 ¦ B_2 ¦ B_3 ¦ B_4 ¦ B_5 ¦¦ T
 1   ¦ 1   ¦ 0   ¦ 1   ¦ 0   ¦ 0   ¦¦ 0
 '''
 
-data = helper.get_data(10).strip("\n").split(" ")
-data = '''[.##.] (3) (1,3) (2) (2,3) (0,2) (0,1) {3,5,4,7}
-[...#.] (0,2,3,4) (2,3) (0,4) (0,1,2) (1,2,3,4) {7,5,12,7,2}
-[.###.#] (0,1,2,3,4) (0,3,4) (0,1,2,4,5) (1,2) {10,11,11,5,10,5}'''.strip("\n").split("\n")
-
+data = helper.get_data(10).strip("\n").split("\n")
 lights = []
 buttons = []
 jotls = []
 
 def main():
+    total_presses = 0
+
     for i, line in enumerate(data):
         line_split = line.split(" ")
 
@@ -65,20 +63,11 @@ def main():
             for k, b in enumerate(button):
                 system_matrix[k][j] = b
 
-
-        print(f'{i}. System Matrix')
-        helper.print_matrix(system_matrix)
-        
-        print(f'{i}. Reduced System Matrix')
         result = solve_system_gf2(system_matrix)
-        helper.print_matrix(result)
-
-        print(f'{i}. Minimal Presses')
         minimal_presses = find_minimal_presses_complete(result, n_buttons)
-        print(minimal_presses)
-        print()
+        total_presses += minimal_presses
 
-    return None
+    return total_presses
 
 def solve_system_gf2(matrix):
     """
@@ -139,9 +128,6 @@ def solve_system_gf2(matrix):
     # You need to implement the back-substitution and the min-presses search next.
     return matrix
 
-# Example usage:
-# reduced_matrix = solve_system_gf2(system_matrix)
-
 from itertools import product
 
 def find_minimal_presses_complete(reduced_matrix, num_buttons):
@@ -201,13 +187,28 @@ def find_minimal_presses_complete(reduced_matrix, num_buttons):
             
             # Assign the resulting value to the pivot variable
             current_solution[col_index] = calculated_pivot_value
+        
+        # 4. Validate the solution against ALL rows in the reduced matrix
+        valid = True
+        for row_idx in range(num_lights):
+            # Calculate the left side of the equation for this row
+            left_side = 0
+            for col_idx in range(num_buttons):
+                if reduced_matrix[row_idx][col_idx] == 1:
+                    left_side ^= current_solution[col_idx]
             
-        # 4. Count the presses and update minimum
-        press_count = sum(current_solution)
-        min_presses = min(min_presses, press_count)
+            # Check if it equals the right side (target)
+            right_side = reduced_matrix[row_idx][num_buttons]
+            if left_side != right_side:
+                valid = False
+                break
+        
+        # Only count valid solutions
+        if valid:
+            press_count = sum(current_solution)
+            min_presses = min(min_presses, press_count)
         
     return min_presses
-
 
 
 if __name__ == "__main__":
