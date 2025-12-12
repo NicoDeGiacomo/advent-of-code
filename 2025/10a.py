@@ -1,11 +1,12 @@
-from _operator import concat
+from itertools import product
 import helper
 
 '''
-pressing a button twice is the same as not pressing it at all (because toggling a light twice returns it to its original state). This means we only care about parity
+Pressing a button twice is the same as not pressing it at all (because toggling a light twice returns it to its original state). This means we only care about parity
 
-The target state can be represented as a binary vector T
-Each button can be represented as a binary vector B
+- The target state can be represented as a binary vector T
+- Each button can be represented as a binary vector B
+
 We are looking to solve:
 T = x_1B_1 + x_2B_2 + ... + x_nB_n
 
@@ -17,12 +18,18 @@ B_0 ¦ B_1 ¦ B_2 ¦ B_3 ¦ B_4 ¦ B_5 ¦¦ T
 0   ¦ 1   ¦ 0   ¦ 0   ¦ 0   ¦ 1   ¦¦ 1
 0   ¦ 0   ¦ 1   ¦ 1   ¦ 1   ¦ 0   ¦¦ 1
 1   ¦ 1   ¦ 0   ¦ 1   ¦ 0   ¦ 0   ¦¦ 0
+
+Having that system matrix, we do the following:
+
+1. Gaussian Elimination
+2. Back Substitution
+3. Find the minimal presses for each button
+4. Sum the minimal presses for all buttons
 '''
 
 data = helper.get_data(10).strip("\n").split("\n")
 lights = []
 buttons = []
-jotls = []
 
 def main():
     total_presses = 0
@@ -115,20 +122,11 @@ def solve_system_gf2(matrix):
 
     # Check for inconsistencies (e.g., [0, 0, ..., 0 | 1] row)
     for i in range(current_row, num_rows):
-        # Check if all coefficients are zero, but the target is 1
-        if any(matrix[i][j] == 1 for j in range(num_cols)):
-            # This shouldn't trigger if the algorithm is working perfectly, 
-            # but it's the conceptual check for unsolvable systems.
-            pass 
-        elif matrix[i][num_cols] == 1:
+        if not any(matrix[i][j] == 1 for j in range(num_cols)) and matrix[i][num_cols] == 1:
             print("System is inconsistent (no solution exists)!")
             return None
-            
-    # The matrix is now in row echelon form. 
-    # You need to implement the back-substitution and the min-presses search next.
+    
     return matrix
-
-from itertools import product
 
 def find_minimal_presses_complete(reduced_matrix, num_buttons):
     """
