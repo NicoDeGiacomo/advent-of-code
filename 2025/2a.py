@@ -2,6 +2,12 @@ import helper
 
 data = helper.get_data(2)
 
+"""
+Iterate through ranges of numbers and sum valid ones.
+- A number is valid if its first half equals its second half.
+- Parse ranges "start-end" and check every number.
+"""
+
 def main():
     sum = 0
 

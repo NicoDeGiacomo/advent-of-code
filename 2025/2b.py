@@ -2,6 +2,12 @@ import helper
 
 data = helper.get_data(2)
 
+"""
+Iterate through ranges and sum numbers that have a repeating pattern.
+- A number repeats if it can be formed by repeating a prefix multiple times.
+- Check all possible prefix lengths for each number.
+"""
+
 def main():
     sum = 0
 

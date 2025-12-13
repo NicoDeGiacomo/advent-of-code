@@ -2,6 +2,12 @@ import helper
 
 data = helper.get_data(3)
 
+"""
+Greedy scan to find the largest two-digit number subsequence.
+- Iterate through digits, maintaining the best pair found so far.
+- If a larger starting digit is found, reset the pair with the next available digit.
+"""
+
 def main():
     sum = 0
 

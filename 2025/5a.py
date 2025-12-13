@@ -2,6 +2,12 @@ import helper
 
 data = helper.get_data(5)
 
+"""
+Count ingredients that fall into at least one valid range.
+- Parse a list of valid ranges and a list of ingredients.
+- For each ingredient, check if it lies within any of the ranges.
+"""
+
 
 def main():
     split_data = data.strip().split("\n\n")

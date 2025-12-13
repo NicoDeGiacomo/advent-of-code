@@ -1,7 +1,10 @@
 import helper
 
 '''
-This is a graph problem. Can be solved with a simple BFS.
+Find shortest path in a graph using BFS.
+- Parse adjacency list from input.
+- Start BFS from 'you' to find 'out'.
+- Return the length of the path.
 '''
 
 data = helper.get_data(11).strip()

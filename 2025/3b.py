@@ -2,6 +2,12 @@ import helper
 
 data = helper.get_data(3)
 
+"""
+Find the largest N-digit number subsequence using a greedy stack approach.
+- Maintain a monotonic decreasing stack to maximize the resulting number.
+- Pop smaller elements if a larger one is found and sufficient digits remain to fill the quota.
+"""
+
 # Generalization of 3a
 N_DIGITS = 12
 

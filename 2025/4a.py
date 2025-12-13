@@ -2,6 +2,13 @@ import helper
 
 data = helper.get_data(4)
 
+"""
+Grid traversal to count safe spots.
+- Iterate through all cells in the grid.
+- Check accessibility of each cell by examining neighbors (8 directions).
+- Count cells that have fewer than 4 dangerous neighbors ('@').
+"""
+
 
 def main():
     matrix = [[c for c in line] for line in data.split()]

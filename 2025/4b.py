@@ -2,6 +2,13 @@ import helper
 
 data = helper.get_data(4)
 
+"""
+Simulation of identifying and removing valid spots until stability.
+- Repeatedly scan the grid for accessible spots (safe neighbors < 4).
+- If a spot is found, count it and mark it as empty ('.').
+- Continue until no new spots are removed in a full pass.
+"""
+
 
 def main():
     matrix = [[c for c in line] for line in data.split()]

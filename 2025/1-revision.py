@@ -2,6 +2,12 @@ import helper
 
 data = helper.get_data(1)
 
+"""
+Optimized math-based simulation of the pointer.
+- Instead of single-stepping, calculate position jumps using modulo arithmetic.
+- Track zero-crossings and stops analytically.
+"""
+
 def main():
     pointer = 50
     stops_at_zero = 0

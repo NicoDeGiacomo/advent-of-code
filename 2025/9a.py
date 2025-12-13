@@ -2,6 +2,13 @@ import helper
 
 data = helper.get_data(9).strip("\n").split("\n")
 
+"""
+Find the largest rectangular area defined by any two points.
+- Iterate through all pairs of points.
+- Calculate the bounding box area for each pair.
+- Track the maximum area found.
+"""
+
 points = [tuple(map(int, line.split(","))) for line in data]
 
 def main():

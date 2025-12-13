@@ -4,6 +4,13 @@ from functools import reduce
 
 data = helper.get_data(6).strip("\n").split("\n")
 
+"""
+Parse and evaluate vertically defined expressions.
+- Scan columns to reconstruct numbers and operators.
+- Group expressions based on operator delimiters.
+- Evaluate each reconstructed expression.
+"""
+
 def main():
     operations = []
     operation = []

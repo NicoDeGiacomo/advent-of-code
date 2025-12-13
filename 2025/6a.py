@@ -4,6 +4,13 @@ from functools import reduce
 
 data = helper.get_data(6)
 
+"""
+Evaluate expressions defined in columns.
+- Transpose the input grid to process columns as rows.
+- Determine the operator (sum/prod) from the last element.
+- Apply the operator to the remaining numbers.
+"""
+
 def main():
     matrix = [[c for c in line.split()] for line in data.strip().split("\n")]
     t_matrix = list(zip(*matrix))

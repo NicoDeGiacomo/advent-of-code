@@ -2,6 +2,14 @@ import helper
 
 data = helper.get_data(7).strip("\n").split("\n")
 
+"""
+Simulate flow propagation on a grid.
+- Iterate row by row.
+- If a source or flow ('S', '|') is found, propagate it downwards.
+- '^' acts as a splitter, spreading flow to diagonals.
+- Count specific flow termination patterns.
+"""
+
 matrix = [[c for c in line] for line in data]
 
 def main():

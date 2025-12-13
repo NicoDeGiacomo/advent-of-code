@@ -2,6 +2,13 @@ import helper
 
 data = helper.get_data(5)
 
+"""
+Compute the total length of the union of multiple intervals.
+- Parse ranges and sort them.
+- Iteratively merge overlapping or contained ranges into a reduced set.
+- Sum the lengths of the final non-overlapping ranges.
+"""
+
 def main():
     split_data = data.strip().split("\n\n")
     

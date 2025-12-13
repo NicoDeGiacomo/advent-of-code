@@ -1,7 +1,11 @@
 import helper
 
 '''
-
+Backtracking solver to fit shapes into regions.
+- Parse shape definitions and region requirements.
+- For each region, attempt to fit the required shapes into the grid.
+- Use backtracking with state pruning (area check, occupancy check).
+- Support shape rotation and flipping (8 symmetries).
 '''
 
 data = helper.get_data(12).strip()
@@ -11,9 +15,6 @@ ALL_REGIONS = []
 
 def main():
     for line in data.split('\n\n'):
-        X = {}
-        Y = {}
-
         if line[1] == ':':
             shape_index = int(line[0])
             ALL_SHAPES[shape_index] = []
@@ -76,10 +77,10 @@ def solve_region(region):
                 if (x, y) in occupied_cells:
                     continue
 
-                for shape in variations:
+                for variation in variations:
                     newly_occupied = []
                     fits = True
-                    for dx, dy in shape:
+                    for dx, dy in variation:
                         nx, ny = x + dx, y + dy
                         if not (0 <= nx < w and 0 <= ny < h):
                             fits = False
@@ -114,16 +115,12 @@ def get_variations(shape_coords):
     current = shape_coords
     for _ in range(2): # Flip
         for _ in range(4): # Rotate
-            if not current:
-                variations.append([])
-            else:
-                # Normalize
-                min_r = min(r for r, c in current)
-                min_c = min(c for r, c in current)
-                normalized = sorted([(r - min_r, c - min_c) for r, c in current])
-                
-                if normalized not in variations:
-                    variations.append(normalized)
+            min_r = min(r for r, c in current)
+            min_c = min(c for r, c in current)
+            normalized = sorted([(r - min_r, c - min_c) for r, c in current])
+            
+            if normalized not in variations:
+                variations.append(normalized)
             
             # Rotate 90 deg clockwise: (r, c) -> (c, -r)
             current = [(c, -r) for r, c in current]
